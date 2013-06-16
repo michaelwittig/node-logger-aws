@@ -12,21 +12,21 @@
 
 # cinovo-logger-aws
 
-cinovo-logger-aws is an AWS endpoint for [cinovo-logger](https://github.com/cinovo/node-logger).
+AWS SNS or SQS endpoint for [cinovo-logger](https://github.com/cinovo/node-logger).
 
 ## Getting started
 
-### At first you must install and require the endpoint.
+### At first you must install and require the logger.
 
-    npm install cinovo-logger cinovo-logger-aws
+    npm install cinovo-logger
 
-### Next you must require the cinovo-logger module
+### Next you must require the module
 
 `````javascript
 var logger = require("cinovo-logger");
 `````
 
-### Append the cinovo-logger-aws endpoint
+### Append cinovo-logger-aws endpoint
 
 	npm install cinovo-logger-aws
 
