@@ -1,0 +1,39 @@
+{
+	"name": "cinovo-logger-aws",
+	"version": "0.0.1",
+	"description": "Logger",
+	"keywords": [
+		"logger",
+		"aws"
+	],
+	"author": {
+		"name": "Michael Wittig",
+		"email": "michael.wittig@cinovo.de"
+	},
+	"contributors": [
+		{
+			"name": "Andreas Wittig",
+			"email": "andreas.wittig@cinovo.de"
+		}
+	],
+	"repository": {
+		"type": "git",
+		"url": "https://github.com/cinovo/node-logger-aws.git"
+	},
+	"dependencies": {
+		"aws-sdk": "1.3.0",
+		"cinovo-logger": "0.0.x"
+	},
+	"devDependencies": {
+	},
+	"main": "index",
+	"engines": {
+		"node": ">= 0.6.0"
+	},
+	"scripts": {
+	},
+	"readmeFilename": "README.md",
+	"bugs": {
+		"url": "https://github.com/cinovo/node-logger-aws/issues"
+	}
+}
