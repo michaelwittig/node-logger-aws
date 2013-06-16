@@ -1,7 +1,7 @@
 {
 	"name": "cinovo-logger-aws",
 	"version": "0.0.1",
-	"description": "Logger",
+	"description": "AWS SQS or SNS endpoint for cinovo-logger.",
 	"keywords": [
 		"logger",
 		"aws"
