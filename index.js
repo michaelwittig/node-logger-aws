@@ -1,6 +1,7 @@
 var util = require("util"),
 	AWS = require("aws-sdk"),
-	logger = require("cinovo-logger");
+	logger = require("cinovo-logger"),
+	assert = require("assert-plus");
 
 function SQSEndpoint(debug, info, error, critial, region, queueUrl, accessKeyId, secretAccessKey) {
 	logger.Endpoint.call(this, debug, info, error, critial);
@@ -56,9 +57,15 @@ SNSEndpoint.prototype.log = function(log, errCallback) {
 };
 
 exports.sns = function(debug, info, error, critial, region, topicArn, accessKeyId, secretAccessKey) {
+	assert.string(topicArn, "topicArn");
+	assert.optionalString(accessKeyId, "accessKeyId");
+	assert.optionalString(secretAccessKey, "secretAccessKey");
 	return new SNSEndpoint(debug, info, error, critial, region, topicArn, accessKeyId, secretAccessKey);
 };
 exports.sqs = function(debug, info, error, critial, region, queueUrl, accessKeyId, secretAccessKey) {
+	assert.string(queueUrl, "queueUrl");
+	assert.optionalString(accessKeyId, "accessKeyId");
+	assert.optionalString(secretAccessKey, "secretAccessKey");
 	return new SQSEndpoint(debug, info, error, critial, region, queueUrl, accessKeyId, secretAccessKey);
 };
 
