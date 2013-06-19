@@ -60,7 +60,7 @@ Now you can log to AWS SNS or SQS endpoints.
 
 ### sns(debug, info, error, critial, region, topicArn, [accessKeyId, secretAccessKey])
 
-Creates an SNS Endpoint.
+Sync creates an SNS Endpoint.
 
 * `debug`: Boolean - true if the endpoint should log debug level
 * `info`: Boolean - true if the endpoint should log info level
@@ -70,9 +70,11 @@ Creates an SNS Endpoint.
 * `accessKeyId`: String - your AWS access key ID. (optional)
 * `secretAccessKey`: String - your AWS secret access key. (optional)
 
+`return`: Endpoint - Endpoint - use the endpoint like this logger.append(endpoint)
+
 ### sqs(debug, info, error, critial, region, queueUrl, [accessKeyId, secretAccessKey])
 
-Creates an SQS Endpoint.
+Sync creates an SQS Endpoint.
 
 * `debug`: Boolean - true if the endpoint should log debug level
 * `info`: Boolean - true if the endpoint should log info level
@@ -81,3 +83,5 @@ Creates an SQS Endpoint.
 * `queueUrl`: String - the URL of the SQS queue to take action on.
 * `accessKeyId`: String - your AWS access key ID. (optional)
 * `secretAccessKey`: String - your AWS secret access key. (optional)
+
+`return`: Endpoint - Endpoint - use the endpoint like this logger.append(endpoint)
