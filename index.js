@@ -25,7 +25,11 @@ SQSEndpoint.prototype.log = function(log, errCallback) {
 	}, errCallback);
 };
 SQSEndpoint.prototype.stop = function(errCallback) {
-	errCallback();
+	try {
+		errCallback();
+	} finally  {
+		this.emit("stop");
+	}
 };
 
 function SNSEndpoint(debug, info, error, critial, region, topicArn, accessKeyId, secretAccessKey) {
@@ -59,7 +63,11 @@ SNSEndpoint.prototype.log = function(log, errCallback) {
 	}, errCallback);
 };
 SNSEndpoint.prototype.stop = function(errCallback) {
-	errCallback();
+	try {
+		errCallback();
+	} finally  {
+		this.emit("stop");
+	}
 };
 
 exports.sns = function(debug, info, error, critial, region, topicArn, accessKeyId, secretAccessKey) {

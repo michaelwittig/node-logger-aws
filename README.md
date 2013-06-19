@@ -85,3 +85,9 @@ Sync creates an SQS Endpoint.
 * `secretAccessKey`: String - your AWS secret access key. (optional)
 
 `return`: Endpoint - Endpoint - use the endpoint like this logger.append(endpoint)
+
+### Events
+
+#### stop()
+
+When the endpoint is stopped.
