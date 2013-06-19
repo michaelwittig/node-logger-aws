@@ -24,6 +24,9 @@ SQSEndpoint.prototype.log = function(log, errCallback) {
 		MessageBody: message
 	}, errCallback);
 };
+SQSEndpoint.prototype.stop = function(errCallback) {
+	errCallback();
+};
 
 function SNSEndpoint(debug, info, error, critial, region, topicArn, accessKeyId, secretAccessKey) {
 	logger.Endpoint.call(this, debug, info, error, critial);
@@ -54,6 +57,9 @@ SNSEndpoint.prototype.log = function(log, errCallback) {
 		Message: message,
 		Subject: "Log: " + log.level + ": " + log.origin
 	}, errCallback);
+};
+SNSEndpoint.prototype.stop = function(errCallback) {
+	errCallback();
 };
 
 exports.sns = function(debug, info, error, critial, region, topicArn, accessKeyId, secretAccessKey) {
