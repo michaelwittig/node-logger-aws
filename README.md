@@ -12,7 +12,7 @@
 
 # cinovo-logger-aws
 
-AWS SNS or SQS endpoint for [cinovo-logger](https://github.com/cinovo/node-logger).
+AWS S3, SNS or SQS endpoint for [cinovo-logger](https://github.com/cinovo/node-logger).
 
 ## Getting started
 
