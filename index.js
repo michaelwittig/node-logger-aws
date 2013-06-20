@@ -1,7 +1,8 @@
 var util = require("util"),
 	AWS = require("aws-sdk"),
 	logger = require("cinovo-logger"),
-	assert = require("assert-plus");
+	assert = require("assert-plus"),
+	safelogger = require("./node_modules/cinovo-logger/lib/safejson");
 
 function SQSEndpoint(debug, info, error, critial, region, queueUrl, accessKeyId, secretAccessKey) {
 	logger.Endpoint.call(this, debug, info, error, critial);
@@ -10,18 +11,9 @@ function SQSEndpoint(debug, info, error, critial, region, queueUrl, accessKeyId,
 }
 util.inherits(SQSEndpoint, logger.Endpoint);
 SQSEndpoint.prototype.log = function(log, errCallback) {
-	var message;
-	if (log.metadata) {
-		try {
-			message = JSON.stringify(log);
-		} catch (err) {
-			errCallback(err);
-			return;
-		}
-	}
 	this.sqs.sendMessage({
 		QueueUrl: this.queueUrl,
-		MessageBody: message
+		MessageBody: safelogger(log)
 	}, errCallback);
 };
 SQSEndpoint.prototype.stop = function(errCallback) {
@@ -49,12 +41,7 @@ SNSEndpoint.prototype.log = function(log, errCallback) {
 	message += "Message: " + log.message + "\n";
 	if (log.metadata) {
 		message += "Metadata:\n";
-		try {
-			message += JSON.stringify(log.metadata);
-		} catch (err) {
-			errCallback(err);
-			return;
-		}
+		message += safelogger(log.metadata);
 	}
 	this.sns.publish({
 		TopicArn: this.topicArn,
