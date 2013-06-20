@@ -89,7 +89,7 @@ function s3copy(s3, bucket, file, callback) {
 		}
 	});
 }
-function s3watcher(endpoint, region, bucket, accessKeyId, secretAccessKey, errCallback) {
+function s3watcher(endpoint, region, bucket, accessKeyId, secretAccessKey) {
 	assert.string(region, "region");
 	assert.string(bucket, "bucket");
 	assert.optionalString(accessKeyId, "accessKeyId");
@@ -121,20 +121,14 @@ function s3watcher(endpoint, region, bucket, accessKeyId, secretAccessKey, errCa
 			}
 		});
 	});
-	errCallback();
 }
 exports.s3 = function(debug, info, error, critial, dir, fileSuffix, filePrefix, maxFileSize, maxFileAge, maxFiles, region, bucket, accessKeyId, secretAccessKey, callback) {
 	require("cinovo-logger-file")(debug, info, error, critial, dir, fileSuffix, filePrefix, maxFileSize, maxFileAge, maxFiles, function(err, endpoint) {
 		if (err) {
 			callback(err);
 		} else {
-			s3watcher(endpoint, region, bucket, accessKeyId, secretAccessKey, function(err) {
-				if (err) {
-					callback(err);
-				} else {
-					callback(undefined, endpoint);
-				}
-			});
+			s3watcher(endpoint, region, bucket, accessKeyId, secretAccessKey);
+			callback(undefined, endpoint);
 		}
 	});
 };

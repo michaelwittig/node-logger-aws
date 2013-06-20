@@ -122,17 +122,15 @@ Async creates an [cinovo-logger-file](https://github.com/cinovo/node-logger-file
     * `err`: Error (optional)
     * `endpoint`: Endpoint - use the endpoint like this logger.append(endpoint)
 
-### s3watcher(endpoint, region, bucket, accessKeyId, secretAccessKey, errCallback)
+### s3watcher(endpoint, region, bucket, [accessKeyId, secretAccessKey])
 
-Async takes an [cinovo-logger-file](https://github.com/cinovo/node-logger-file) endpoint to copy log files into S3 on roll or stop.
+Sync takes an [cinovo-logger-file](https://github.com/cinovo/node-logger-file) endpoint to copy log files into S3 on roll or stop.
 
 * `endpoint`: FileEndpoint
 * `region`: String - your AWS region
 * `bucket`: String - your AWS bucke name
 * `accessKeyId`: String - your AWS access key ID (optional)
 * `secretAccessKey`: String - your AWS secret access key (optional)
-* `errCallback`: Function(err)
-    * `err`: Error (optional)
 
 #### Events
 

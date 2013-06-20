@@ -22,15 +22,13 @@ describe("s3", function(){
 						if (err) {
 							throw err;
 						} else {
-							setTimeout(function() {
-								e.stop(function(err) {
-									if (err) {
-										throw err;
-									} else {
-										done();
-									}
-								});
-							}, 1000);
+							e.stop(function(err) {
+								if (err) {
+									throw err;
+								} else {
+									done();
+								}
+							});
 						}
 					});
 				}
@@ -48,26 +46,19 @@ describe("s3", function(){
 				if (err) {
 					throw err;
 				} else {
-					endpoint.s3watcher(e, "eu-west-1", "cinovo-logger-aws-test", undefined, undefined, function(err) {
+					e.on("error", function(err) {
+						throw err;
+					});
+					endpoint.s3watcher(e, "eu-west-1", "cinovo-logger-aws-test");
+					e.log(log, function(err) {
 						if (err) {
 							throw err;
 						} else {
-							e.on("error", function(err) {
-								throw err;
-							});
-							e.log(log, function(err) {
+							e.stop(function(err) {
 								if (err) {
 									throw err;
 								} else {
-									setTimeout(function() {
-										e.stop(function(err) {
-											if (err) {
-												throw err;
-											} else {
-												done();
-											}
-										});
-									}, 1000);
+									done();
 								}
 							});
 						}
