@@ -33,7 +33,7 @@ var logger = require("cinovo-logger");
 In your JavaScript code append the S3 endpoint.
 
 `````javascript
-require("cinovo-logger-aws").s3(true, true, true, true, "./test/log", "s3_", ".log", 1024 * 1024, 60 * 60, 5, "eu-west-1", "my-bucket-name", undefined, undefined, function(err, endpoint) {
+require("cinovo-logger-aws").s3(true, true, true, true, "./log", "s3_", ".log", 1024 * 1024, 60 * 60, 5, "eu-west-1", "my-bucket-name", undefined, undefined, function(err, endpoint) {
 	if (err) {
 		throw err;
 	} else {
