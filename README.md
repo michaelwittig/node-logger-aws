@@ -45,13 +45,13 @@ require("cinovo-logger-aws").s3(true, true, true, true, "./log", "s3_", ".log", 
 and / or append the SNS endpoint.
 
 `````javascript
-logger.append(require("cinovo-logger-aws").sns(true, true, true, true, "topicArn"));
+logger.append(require("cinovo-logger-aws").sns(true, true, true, true, "eu-west-1", "topicArn"));
 `````
 
 and / or append the SQS endpoint.
 
 `````javascript
-logger.append(require("cinovo-logger-aws").sqs(true, true, true, true, "queueUrl"));
+logger.append(require("cinovo-logger-aws").sqs(true, true, true, true, "eu-west-1", "queueUrl"));
 `````
 
 ### Log something

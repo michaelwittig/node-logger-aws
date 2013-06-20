@@ -47,7 +47,7 @@ SNSEndpoint.prototype.log = function(log, errCallback) {
 	this.sns.publish({
 		TopicArn: this.topicArn,
 		Message: message,
-		Subject: "Log: " + log.level + ": " + log.origin
+		Subject: "Log[ " + log.level + "]: " + log.origin
 	}, errCallback);
 };
 SNSEndpoint.prototype.stop = function(errCallback) {
