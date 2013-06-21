@@ -6,7 +6,7 @@ var util = require("util"),
 	fs = require("fs");
 
 function SQSEndpoint(debug, info, error, critial, region, queueUrl, accessKeyId, secretAccessKey) {
-	logger.Endpoint.call(this, debug, info, error, critial);
+	logger.Endpoint.call(this, debug, info, error, critial, "SQS:" + queueUrl);
 	this.sqs = new AWS.SQS({region: region, accessKeyId: accessKeyId, secretAccessKey: secretAccessKey});
 	this.queueUrl = queueUrl;
 }
@@ -26,7 +26,7 @@ SQSEndpoint.prototype.stop = function(errCallback) {
 };
 
 function SNSEndpoint(debug, info, error, critial, region, topicArn, accessKeyId, secretAccessKey) {
-	logger.Endpoint.call(this, debug, info, error, critial);
+	logger.Endpoint.call(this, debug, info, error, critial, "SNS:" + topicArn);
 	this.sns = new AWS.SNS({region: region, accessKeyId: accessKeyId, secretAccessKey: secretAccessKey});
 	this.topicArn = topicArn;
 }
