@@ -34,6 +34,7 @@ util.inherits(SNSEndpoint, logger.Endpoint);
 SNSEndpoint.prototype.log = function(log, errCallback) {
 	var message = "Level: " + log.level + "\n";
 	message += "Date: " + log.date + "\n";
+	message += "Hostname: " + log.hostname + "\n";
 	message += "Pid: " + log.pid + "\n";
 	message += "Origin: " + log.origin + "\n";
 	if (log.fullOrigin !== undefined) {
