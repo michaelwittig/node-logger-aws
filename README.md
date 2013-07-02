@@ -33,7 +33,7 @@ var logger = require("cinovo-logger");
 In your JavaScript code append the S3 endpoint.
 
 `````javascript
-require("cinovo-logger-aws").s3(true, true, true, true, "./log", "s3_", ".log", 1024 * 1024, 60 * 60, 5, "eu-west-1", "my-bucket-name", undefined, undefined, function(err, endpoint) {
+require("cinovo-logger-aws").s3(true, true, true, true, "./log", "s3_", ".log", 1024 * 1024, 60 * 60, 5, "eu-west-1", "my-bucket-name", "my/folder", undefined, undefined, function(err, endpoint) {
 	if (err) {
 		throw err;
 	} else {
@@ -100,7 +100,7 @@ Sync creates an SQS endpoint.
 
 `return`: Endpoint - Endpoint - use the endpoint like this logger.append(endpoint)
 
-### s3(debug, info, error, critial, dir, fileSuffix, filePrefix, maxFileSize, maxFileAge, maxFiles, callback)
+### s3(debug, info, error, critial, dir, fileSuffix, filePrefix, maxFileSize, maxFileAge, maxFiles, region, bucket, bucketDir, accessKeyId, secretAccessKey, callback)
 
 Async creates an [cinovo-logger-file](https://github.com/cinovo/node-logger-file) endpoint to copy log files into S3 on roll or stop.
 
@@ -116,19 +116,21 @@ Async creates an [cinovo-logger-file](https://github.com/cinovo/node-logger-file
 * `maxFiles`: Number - Maximum Number of files in dir (oldest are removed first)
 * `region`: String - your AWS region
 * `bucket`: String - your AWS bucke name
+* `bucketDir`: String - your AWS bucket "directory" (e. g. /logs/ )
 * `accessKeyId`: String - your AWS access key ID (optional)
 * `secretAccessKey`: String - your AWS secret access key (optional)
 * `callback`: Function(err, endpoint) - fired if the endpoint is ready to use
     * `err`: Error (optional)
     * `endpoint`: Endpoint - use the endpoint like this logger.append(endpoint)
 
-### s3watcher(endpoint, region, bucket, [accessKeyId, secretAccessKey])
+### s3watcher(endpoint, region, bucket, bucketDir, [accessKeyId, secretAccessKey])
 
 Sync takes an [cinovo-logger-file](https://github.com/cinovo/node-logger-file) endpoint to copy log files into S3 on roll or stop.
 
 * `endpoint`: FileEndpoint
 * `region`: String - your AWS region
 * `bucket`: String - your AWS bucke name
+* `bucketDir`: String - your AWS bucket "directory" (e. g. /logs/ )
 * `accessKeyId`: String - your AWS access key ID (optional)
 * `secretAccessKey`: String - your AWS secret access key (optional)
 

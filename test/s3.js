@@ -5,13 +5,106 @@ var assert = require("assert-plus"),
 
 describe("s3", function(){
 	describe("s3()", function() {
-		it("should copy two files to s3", function(done) {
+		it("should copy two files to s3 into /test", function(done) {
 			var log = {
 				level: "debug",
 				message: "Test",
 				origin: "test"
 			};
-			endpoint.s3(true, true, true, true, "./test/log", "s3_", ".log", 5, 60 * 60, 5, "eu-west-1", "cinovo-logger-aws-test", undefined, undefined, function(err, e) {
+			endpoint.s3(true, true, true, true, "./test/log", "s3_", ".log", 5, 60 * 60, 5, "eu-west-1", "cinovo-logger-aws-test", "/test", undefined, undefined, function(err, e) {
+				if (err) {
+					throw err;
+				} else {
+					e.on("error", function(err) {
+						throw err;
+					});
+					e.log(log, function(err) {
+						if (err) {
+							throw err;
+						} else {
+							e.stop(function(err) {
+								if (err) {
+									throw err;
+								} else {
+									done();
+								}
+							});
+						}
+					});
+				}
+			});
+		});
+	});
+	describe("s3()", function() {
+		it("should copy two files to s3 into /test/", function(done) {
+			var log = {
+				level: "debug",
+				message: "Test",
+				origin: "test"
+			};
+			endpoint.s3(true, true, true, true, "./test/log", "s3_", ".log", 5, 60 * 60, 5, "eu-west-1", "cinovo-logger-aws-test", "/test/", undefined, undefined, function(err, e) {
+				if (err) {
+					throw err;
+				} else {
+					e.on("error", function(err) {
+						throw err;
+					});
+					e.log(log, function(err) {
+						if (err) {
+							throw err;
+						} else {
+							e.stop(function(err) {
+								if (err) {
+									throw err;
+								} else {
+									done();
+								}
+							});
+						}
+					});
+				}
+			});
+		});
+	});
+	describe("s3()", function() {
+		it("should copy two files to s3 into test", function(done) {
+			var log = {
+				level: "debug",
+				message: "Test",
+				origin: "test"
+			};
+			endpoint.s3(true, true, true, true, "./test/log", "s3_", ".log", 5, 60 * 60, 5, "eu-west-1", "cinovo-logger-aws-test", "test", undefined, undefined, function(err, e) {
+				if (err) {
+					throw err;
+				} else {
+					e.on("error", function(err) {
+						throw err;
+					});
+					e.log(log, function(err) {
+						if (err) {
+							throw err;
+						} else {
+							e.stop(function(err) {
+								if (err) {
+									throw err;
+								} else {
+									done();
+								}
+							});
+						}
+					});
+				}
+			});
+		});
+	});
+	describe("s3()", function() {
+		it("should copy two files to s3 into /test", function(done) {
+			var log = {
+				level: "debug",
+				message: "Test",
+				origin: "test"
+			};
+			endpoint.s3(true, true, true, true, "./test/log", "s3_", ".log", 5, 60 * 60, 5, "eu-west-1", "cinovo-logger-aws-test", "", undefined, undefined, function(err, e) {
 				if (err) {
 					throw err;
 				} else {
@@ -49,7 +142,7 @@ describe("s3", function(){
 					e.on("error", function(err) {
 						throw err;
 					});
-					endpoint.s3watcher(e, "eu-west-1", "cinovo-logger-aws-test");
+					endpoint.s3watcher(e, "eu-west-1", "cinovo-logger-aws-test", "test");
 					e.log(log, function(err) {
 						if (err) {
 							throw err;

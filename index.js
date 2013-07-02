@@ -77,29 +77,38 @@ function fileNameFromFile(file) {
 	var parts = file.split("/");
 	return parts[parts.length - 1];
 }
-function s3copy(s3, bucket, file, callback) {
+function s3copy(s3, bucket, bucketDir, file, callback) {
 	fs.readFile(file, function(err, buffer) {
 		if (err) {
 			callback(err);
 		} else {
 			s3.putObject({
 				Bucket: bucket,
-				Key: fileNameFromFile(file),
+				Key: bucketDir + fileNameFromFile(file),
 				Body: buffer
 			}, callback);
 		}
 	});
 }
-function s3watcher(endpoint, region, bucket, accessKeyId, secretAccessKey) {
+function s3watcher(endpoint, region, bucket, bucketDir, accessKeyId, secretAccessKey) {
 	assert.string(region, "region");
 	assert.string(bucket, "bucket");
+	assert.string(bucketDir, "bucketDir");
+	if (bucketDir.length > 0) {
+		if (bucketDir[0] === "/") { // remove leading slash
+			bucketDir = bucketDir.substr(1);
+		}
+		if (bucketDir[bucketDir.length - 1] !== "/") { // append ending slash
+			bucketDir += "/";
+		}
+	}
 	assert.optionalString(accessKeyId, "accessKeyId");
 	assert.optionalString(secretAccessKey, "secretAccessKey");
 	endpoint.s3 = new AWS.S3({region: region, accessKeyId: accessKeyId, secretAccessKey: secretAccessKey});
 	var oldStop = endpoint.stop;
 	endpoint.stop = function(errCallback) {
 		endpoint.once("stop", function(file) {
-			s3copy(endpoint.s3, bucket, file, function(err) {
+			s3copy(endpoint.s3, bucket, bucketDir, file, function(err) {
 				if (err) {
 					errCallback(err);
 				} else {
@@ -114,7 +123,7 @@ function s3watcher(endpoint, region, bucket, accessKeyId, secretAccessKey) {
 		});
 	};
 	endpoint.on("rollFile", function(file) {
-		s3copy(endpoint.s3, bucket, file, function(err, data) {
+		s3copy(endpoint.s3, bucket, bucketDir, file, function(err, data) {
 			if (err) {
 				endpoint.emit("error", err);
 			} else {
@@ -123,12 +132,12 @@ function s3watcher(endpoint, region, bucket, accessKeyId, secretAccessKey) {
 		});
 	});
 }
-exports.s3 = function(debug, info, error, critial, dir, fileSuffix, filePrefix, maxFileSize, maxFileAge, maxFiles, region, bucket, accessKeyId, secretAccessKey, callback) {
+exports.s3 = function(debug, info, error, critial, dir, fileSuffix, filePrefix, maxFileSize, maxFileAge, maxFiles, region, bucket, bucketDir, accessKeyId, secretAccessKey, callback) {
 	require("cinovo-logger-file")(debug, info, error, critial, dir, fileSuffix, filePrefix, maxFileSize, maxFileAge, maxFiles, function(err, endpoint) {
 		if (err) {
 			callback(err);
 		} else {
-			s3watcher(endpoint, region, bucket, accessKeyId, secretAccessKey);
+			s3watcher(endpoint, region, bucket, bucketDir, accessKeyId, secretAccessKey);
 			callback(undefined, endpoint);
 		}
 	});
