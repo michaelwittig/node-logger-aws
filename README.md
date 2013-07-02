@@ -116,7 +116,7 @@ Async creates an [cinovo-logger-file](https://github.com/cinovo/node-logger-file
 * `maxFiles`: Number - Maximum Number of files in dir (oldest are removed first)
 * `region`: String - your AWS region
 * `bucket`: String - your AWS bucke name
-* `bucketDir`: String - your AWS bucket "directory" (e. g. /logs/ )
+* `bucketDir`: String or Function - your AWS bucket "directory" (e. g. logs/ or logs/a/b/)
 * `accessKeyId`: String - your AWS access key ID (optional)
 * `secretAccessKey`: String - your AWS secret access key (optional)
 * `callback`: Function(err, endpoint) - fired if the endpoint is ready to use
@@ -130,7 +130,7 @@ Sync takes an [cinovo-logger-file](https://github.com/cinovo/node-logger-file) e
 * `endpoint`: FileEndpoint
 * `region`: String - your AWS region
 * `bucket`: String - your AWS bucke name
-* `bucketDir`: String - your AWS bucket "directory" (e. g. /logs/ )
+* `bucketDir`: String or Function - your AWS bucket "directory" (e. g. logs/ or logs/a/b/)
 * `accessKeyId`: String - your AWS access key ID (optional)
 * `secretAccessKey`: String - your AWS secret access key (optional)
 

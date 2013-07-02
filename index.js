@@ -82,9 +82,15 @@ function s3copy(s3, bucket, bucketDir, file, callback) {
 		if (err) {
 			callback(err);
 		} else {
+			var s;
+			if (typeof bucketDir === "string") {
+				s = bucketDir;
+			} else if (typeof bucketDir === "function") {
+				s = bucketDir();
+			}
 			s3.putObject({
 				Bucket: bucket,
-				Key: bucketDir + fileNameFromFile(file),
+				Key: s + fileNameFromFile(file),
 				Body: buffer
 			}, callback);
 		}
@@ -93,14 +99,27 @@ function s3copy(s3, bucket, bucketDir, file, callback) {
 function s3watcher(endpoint, region, bucket, bucketDir, accessKeyId, secretAccessKey) {
 	assert.string(region, "region");
 	assert.string(bucket, "bucket");
-	assert.string(bucketDir, "bucketDir");
-	if (bucketDir.length > 0) {
-		if (bucketDir[0] === "/") { // remove leading slash
-			bucketDir = bucketDir.substr(1);
+	if (typeof bucketDir === "string") {
+		if (bucketDir.length > 0) {
+			if (bucketDir[0] === "/") { // remove leading slash
+				bucketDir = bucketDir.substr(1);
+			}
+			if (bucketDir[bucketDir.length - 1] !== "/") { // append closing slash
+				bucketDir += "/";
+			}
 		}
-		if (bucketDir[bucketDir.length - 1] !== "/") { // append ending slash
-			bucketDir += "/";
+	} else if (typeof bucketDir === "function") {
+		var s = bucketDir();
+		if (s.length > 0) {
+			if (s[0] === "/") {
+				assert.fail("bucketDir function returns string with leading /");
+			}
+			if (s[s.length - 1] !== "/") {
+				assert.fail("bucketDir function returns string without closing /");
+			}
 		}
+	} else {
+		assert.fail("bucketDir must be string or function");
 	}
 	assert.optionalString(accessKeyId, "accessKeyId");
 	assert.optionalString(secretAccessKey, "secretAccessKey");
