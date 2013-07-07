@@ -83,7 +83,7 @@ Sync creates an SNS endpoint.
 * `accessKeyId`: String - your AWS access key ID (optional)
 * `secretAccessKey`: String - your AWS secret access key (optional)
 
-`return`: Endpoint - Endpoint - use the endpoint like this logger.append(endpoint)
+`return`: Endpoint - use the endpoint like this logger.append(endpoint)
 
 ### sqs(debug, info, error, critial, region, queueUrl, [accessKeyId, secretAccessKey])
 
@@ -98,7 +98,7 @@ Sync creates an SQS endpoint.
 * `accessKeyId`: String - your AWS access key ID (optional)
 * `secretAccessKey`: String - your AWS secret access key (optional)
 
-`return`: Endpoint - Endpoint - use the endpoint like this logger.append(endpoint)
+`return`: Endpoint - use the endpoint like this logger.append(endpoint)
 
 ### s3(debug, info, error, critial, dir, fileSuffix, filePrefix, maxFileSize, maxFileAge, maxFiles, region, bucket, bucketDir, accessKeyId, secretAccessKey, callback)
 
