@@ -147,8 +147,3 @@ If the file can not be copied to S3 during roll.
 * `file`: String - name of file that was copied (without path)
 * `etag`: String - AWS entity tag for the uploaded object
 
-### Events
-
-#### stop()
-
-When the endpoint is stopped.

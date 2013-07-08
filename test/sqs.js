@@ -3,6 +3,8 @@ var assert = require("assert-plus"),
 	endpoint = require("../index"),
 	file = require("cinovo-logger-file");
 
+var queueUrl = "test";
+
 describe("sqs", function(){
 	describe("sqs()", function() {
 		it("should send an messag to a SNS topic", function(done) {
@@ -11,7 +13,7 @@ describe("sqs", function(){
 				message: "Test",
 				origin: "test"
 			};
-			var e = endpoint.sqs(true, true, true, true, "eu-west-1", "queueUrl");
+			var e = endpoint.sqs(true, true, true, true, "eu-west-1", queueUrl);
 			e.on("error", function(err) {
 				throw err;
 			});

@@ -3,6 +3,8 @@ var assert = require("assert-plus"),
 	endpoint = require("../index"),
 	file = require("cinovo-logger-file");
 
+var topicArn = "test";
+
 describe("sns", function(){
 	describe("sns()", function() {
 		it("should send an messag to a SNS topic", function(done) {
@@ -11,7 +13,7 @@ describe("sns", function(){
 				message: "Test",
 				origin: "test"
 			};
-			var e = endpoint.sns(true, true, true, true, "eu-west-1", "topicArn");
+			var e = endpoint.sns(true, true, true, true, "eu-west-1", topicArn);
 			e.on("error", function(err) {
 				throw err;
 			});

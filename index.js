@@ -1,37 +1,32 @@
 var util = require("util"),
 	AWS = require("aws-sdk"),
-	logger = require("cinovo-logger"),
-	assert = require("assert-plus"),
 	lib = require("cinovo-logger-lib"),
+	assert = require("assert-plus"),
 	fs = require("fs");
 
 function SQSEndpoint(debug, info, error, critial, region, queueUrl, accessKeyId, secretAccessKey) {
-	logger.Endpoint.call(this, debug, info, error, critial, "SQS:" + queueUrl);
+	lib.Endpoint.call(this, debug, info, error, critial, "SQS:" + queueUrl);
 	this.sqs = new AWS.SQS({region: region, accessKeyId: accessKeyId, secretAccessKey: secretAccessKey});
 	this.queueUrl = queueUrl;
 }
-util.inherits(SQSEndpoint, logger.Endpoint);
-SQSEndpoint.prototype.log = function(log, errCallback) {
+util.inherits(SQSEndpoint, lib.Endpoint);
+SQSEndpoint.prototype._log = function(log, callback) {
 	this.sqs.sendMessage({
 		QueueUrl: this.queueUrl,
 		MessageBody: lib.safejson(log)
-	}, errCallback);
+	}, callback);
 };
-SQSEndpoint.prototype.stop = function(errCallback) {
-	try {
-		errCallback();
-	} finally  {
-		this.emit("stop");
-	}
+SQSEndpoint.prototype._stop = function(callback) {
+	callback();
 };
 
 function SNSEndpoint(debug, info, error, critial, region, topicArn, accessKeyId, secretAccessKey) {
-	logger.Endpoint.call(this, debug, info, error, critial, "SNS:" + topicArn);
+	lib.Endpoint.call(this, debug, info, error, critial, "SNS:" + topicArn);
 	this.sns = new AWS.SNS({region: region, accessKeyId: accessKeyId, secretAccessKey: secretAccessKey});
 	this.topicArn = topicArn;
 }
-util.inherits(SNSEndpoint, logger.Endpoint);
-SNSEndpoint.prototype.log = function(log, errCallback) {
+util.inherits(SNSEndpoint, lib.Endpoint);
+SNSEndpoint.prototype._log = function(log, callback) {
 	var message = "Level: " + log.level + "\n";
 	message += "Date: " + log.date + "\n";
 	message += "Hostname: " + log.hostname + "\n";
@@ -49,14 +44,10 @@ SNSEndpoint.prototype.log = function(log, errCallback) {
 		TopicArn: this.topicArn,
 		Message: message,
 		Subject: "Log[ " + log.level + "]: " + log.origin + " (" + this.name + ")"
-	}, errCallback);
+	}, callback);
 };
-SNSEndpoint.prototype.stop = function(errCallback) {
-	try {
-		errCallback();
-	} finally  {
-		this.emit("stop");
-	}
+SNSEndpoint.prototype._stop = function(callback) {
+	callback();
 };
 
 exports.sns = function(debug, info, error, critial, region, topicArn, accessKeyId, secretAccessKey) {
@@ -125,19 +116,19 @@ function s3watcher(endpoint, region, bucket, bucketDir, accessKeyId, secretAcces
 	assert.optionalString(secretAccessKey, "secretAccessKey");
 	endpoint.s3 = new AWS.S3({region: region, accessKeyId: accessKeyId, secretAccessKey: secretAccessKey});
 	var oldStop = endpoint.stop;
-	endpoint.stop = function(errCallback) {
-		endpoint.once("stop", function(file) {
+	endpoint.stop = function(callback) {
+		endpoint.once("_stop", function(file) {
 			s3copy(endpoint.s3, bucket, bucketDir, file, function(err) {
 				if (err) {
-					errCallback(err);
+					callback(err);
 				} else {
-					errCallback();
+					callback();
 				}
 			});
 		});
 		oldStop.call(endpoint, function(err) {
 			if (err) {
-				errCallback(err);
+				callback(err);
 			}
 		});
 	};
