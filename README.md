@@ -66,7 +66,7 @@ logger.critical("myscript", "all values are not ok", {a: 10, b: 20}, function(er
 
 ### Done
 
-Now you can log to AWS SNS or SQS endpoints.
+Now you can log to AWS S3, SNS or SQS endpoints.
 
 ## API
 
