@@ -3,7 +3,7 @@ var assert = require("assert-plus"),
 	endpoint = require("../index"),
 	file = require("cinovo-logger-file");
 
-var queueUrl = "test";
+var queueUrl = "https://sqs.eu-west-1.amazonaws.com/595296147869/cinovo-logger-aws-test";
 
 describe("sqs", function(){
 	describe("sqs()", function() {

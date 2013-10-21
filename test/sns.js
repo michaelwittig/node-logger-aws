@@ -3,7 +3,7 @@ var assert = require("assert-plus"),
 	endpoint = require("../index"),
 	file = require("cinovo-logger-file");
 
-var topicArn = "test";
+var topicArn = "arn:aws:sns:eu-west-1:595296147869:cinovo-logger-aws-test";
 
 describe("sns", function(){
 	describe("sns()", function() {

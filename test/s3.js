@@ -4,7 +4,7 @@ var assert = require("assert-plus"),
 	file = require("cinovo-logger-file"),
 	expect = require("expect.js");
 
-var bucket = "test";
+var bucket = "cinovo-logger-aws-test";
 
 describe("s3", function(){
 	describe("s3()", function() {
