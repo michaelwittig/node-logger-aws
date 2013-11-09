@@ -10,6 +10,8 @@
                                                                       \_/__/  \_/__/
 `````
 
+[![NPM version](https://badge.fury.io/js/cinovo-logger-aws.png)](http://badge.fury.io/js/cinovo-logger-aws)
+
 # cinovo-logger-aws
 
 AWS S3, SNS or SQS endpoint for [cinovo-logger](https://github.com/cinovo/node-logger).
