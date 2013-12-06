@@ -1,6 +1,6 @@
 {
 	"name": "cinovo-logger-aws",
-	"version": "0.4.2",
+	"version": "0.4.3",
 	"description": "AWS SQS or SNS endpoint for cinovo-logger.",
 	"keywords": [
 		"logger",
@@ -28,11 +28,11 @@
 		"aws-sdk": "1.9.0",
 		"cinovo-logger-lib": ">=0.4.3 <0.5.0",
 		"cinovo-logger-file": ">=0.4.2 <0.5.0",
-		"assert-plus": "0.1.4"
+		"assert-plus": "0.1.5"
 	},
 	"devDependencies": {
-		"mocha": "1.13.0",
-		"jslint": "0.2.0",
+		"mocha": "1.15.1",
+		"jslint": "0.2.5",
 		"madge": "0.1.7",
 		"npmedge": "0.1.4",
 		"expect.js": "0.2.0"
