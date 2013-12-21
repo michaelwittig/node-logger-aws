@@ -11,6 +11,7 @@
 `````
 
 [![NPM version](https://badge.fury.io/js/cinovo-logger-aws.png)](http://badge.fury.io/js/cinovo-logger-aws)
+[![NPM dependencies](https://david-dm.org/cinovo/node-logger-aws.png)](https://david-dm.org/cinovo/node-logger-aws)
 
 # cinovo-logger-aws
 
