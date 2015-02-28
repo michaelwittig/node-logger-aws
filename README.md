@@ -11,11 +11,11 @@
 `````
 
 [![NPM version](https://badge.fury.io/js/cinovo-logger-aws.png)](http://badge.fury.io/js/cinovo-logger-aws)
-[![NPM dependencies](https://david-dm.org/cinovo/node-logger-aws.png)](https://david-dm.org/cinovo/node-logger-aws)
+[![NPM dependencies](https://david-dm.org/michaelwittig/node-logger-aws.png)](https://david-dm.org/michaelwittig/node-logger-aws)
 
 # cinovo-logger-aws
 
-AWS S3, SNS or SQS endpoint for [cinovo-logger](https://github.com/cinovo/node-logger).
+AWS S3, SNS or SQS endpoint for [cinovo-logger](https://github.com/michaelwittig/node-logger).
 
 ## Getting started
 
@@ -105,7 +105,7 @@ Sync creates an SQS endpoint.
 
 ### s3(debug, info, error, critial, dir, fileSuffix, filePrefix, maxFileSize, maxFileAge, maxFiles, region, bucket, bucketDir, accessKeyId, secretAccessKey, callback)
 
-Async creates an [cinovo-logger-file](https://github.com/cinovo/node-logger-file) endpoint to copy log files into S3 on roll or stop.
+Async creates an [cinovo-logger-file](https://github.com/michaelwittig/node-logger-file) endpoint to copy log files into S3 on roll or stop.
 
 * `debug`: Boolean - true if the endpoint should log debug level
 * `info`: Boolean - true if the endpoint should log info level
@@ -128,7 +128,7 @@ Async creates an [cinovo-logger-file](https://github.com/cinovo/node-logger-file
 
 ### s3watcher(endpoint, region, bucket, bucketDir, [accessKeyId, secretAccessKey])
 
-Sync takes an [cinovo-logger-file](https://github.com/cinovo/node-logger-file) endpoint to copy log files into S3 on roll or stop.
+Sync takes an [cinovo-logger-file](https://github.com/michaelwittig/node-logger-file) endpoint to copy log files into S3 on roll or stop.
 
 * `endpoint`: FileEndpoint
 * `region`: String - your AWS region
